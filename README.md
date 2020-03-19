@@ -22,6 +22,7 @@ Data account is created, will be linked soon.
 I finally create a Github repository to document this project
 
 > 2020/02/27
+<img src="pic/hybrid.jpg" width="30%" align="right">
 
 The hybrid wind solar power generator arrives - despite the corona virus outbreak in China. Declarations with customs and DHL took some time, but it's now here. Other parts will be ordered locally.
 
