@@ -4,19 +4,21 @@ This project continuously measures the output power of a solar cell. The data is
 
 ## Setup
 
-The initial setup from January 2020 requires a Laptop with Vernier software to measure just one data point. The circuit looks like this:
+The initial setup from December 2019 requires a Laptop with Vernier software to measure just one data point. The circuit looks like this:
 
 ![load circuit for the solar panel and voltage measurement](pic/setup_2020-01-16.jpg)
 
-For the future design of April 2020 the voltage is measured by the ESP32 and the value transfered to a database in the internet every 5 minutes. This gives 288 data points per day.
+For the future design of April 2020 the voltage is measured by the ESP32 and the value transfered to a database in the internet every 5 minutes. This gives 288 data points per day. An article at [randomnerdtutorials](https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/) explains the setup and programming very well;
 
-Additionally there are 4 digital switches for different loads planned. The ESP32 is activating them prior to the measurement and can combine the swithces for 16 different load values.
+![Setup of ESP32](pic/analog_input_esp32.jpg)
+
+Additionally there are 4 digital switches for different loads planned. The ESP32 is activating them prior to the measurement and can combine the swithces for 16 different load values. The setup now looks like this:
+
+![adjustable load setup ESP32](pic/setup_2020-03-20.jpg)
+
+With the 4 switches we can create 16 datapoints, that the ESP32 can read in 12 bit. Every 5 minutes we create therefore 24 byte of data. Over a day this accumulates to 6912 byte and in a year all data collected is 2.5 MByte.
 
 
-
-With the 
-
-The data will be found at 
 
 ## Materials
 
@@ -58,7 +60,7 @@ void loop() {
 
 ## Measurements and results
 
-Data account is created, will be linked soon.
+Data account is created, will be linked soon. Mostly to be found at [sites.google.com/ais.edu.vn/solar](https://sites.google.com/ais.edu.vn/solar).
 
 ## History
 
@@ -68,13 +70,23 @@ Interview with Tom about his EE project about renewable energy in Vietnam. As fo
 
 To collect data I created a new Google account as aisvn.data for emails and communication (MQTT, IFTTT). 
 
-> 2020/01/16
+> 2019/12/08
+
+The website [sites.google.com/ais.edu.vn/solar](https://sites.google.com/ais.edu.vn/solar) is created. The measured data from the last 36 hours is displayed in an interactive graph.
+
+> 2019/12/14
+
+I created a jupyter notebook with the first informations. The document can be found [here](https://colab.research.google.com/drive/1SWBxNhv9skyehvX9P8T1SB_Elqk8s_KK?usp=sharing). A copy is included in software.
+
+> 2019/12/17
 
 For about an hour during assigned study we tried to measure the characteristics of a 12 Volt 6 Watt solar panel that the school provided. The values are measured with the [Vernier voltage probe](https://www.vernier.com/product/voltage-probe/) and the [current probe](https://www.vernier.com/product/current-probe/). Unfortunately the voltage probe has a maximum voltage range of 10 Volt, while the solar panel provides up to 16 Volt without any load.
 
 __Solution 1:__ A voltage divider made of two 1 kiloOhm resistor divided the output by 2 and moved it into the voltage limit of the probe. A successful reading now indicated the second problem: Without any load the output voltage is almost constant, since it mainly derives from the band gap in the semiconductor. This is well illustrated in this [graph from wikipedia](https://commons.wikimedia.org/wiki/File:Actual_output_in_volts,_amps,_and_wattage_from_a_100_Watt_Solar_module_in_August.jpg):
 
-<img src="pic/hourly_production.jpg" width="80%" align="center">
+<p align="center">
+<img src="pic/hourly_production.jpg" width="80%">
+</p>
 
 Note that only the current increases during daytime. Since the power is a product of voltage and current, the power increases as well.
 
