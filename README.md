@@ -23,6 +23,22 @@ Interview with Tom about his EE project about renewable energy in Vietnam. As fo
 
 To collect data I created a new Google account as aisvn.data for emails and communication (MQTT, IFTTT). 
 
+> 2020/01/16
+
+For about an hour during assigned study we tried to measure the characteristics of a 12 Volt 6 Watt solar panel that the school provided. The values are measured with the [Vernier voltage probe](https://www.vernier.com/product/voltage-probe/) and the [current probe](https://www.vernier.com/product/current-probe/). Unfortunately the voltage probe has a maximum voltage range of 10 Volt, while the solar panel provides up to 16 Volt without any load.
+
+__Solution 1:__ A voltage divider made of two 1 kiloOhm resistor divided the output by 2 and moved it into the voltage limit of the probe. A successful reading now indicated the second problem: Without any load the output voltage is almost constant, since it mainly derives from the band gap in the semiconductor. This is well illustrated in this [graph from wikipedia](https://commons.wikimedia.org/wiki/File:Actual_output_in_volts,_amps,_and_wattage_from_a_100_Watt_Solar_module_in_August.jpg):
+
+<img src="pic/hourly_production.jpg" align="center" width="80%>
+
+Note that only the current increases during daytime. Since the power is a product of voltage and current, the power increases as well.
+
+__Solution 2:__ A [MPPT](https://en.wikipedia.org/wiki/Maximum_power_point_tracking) (Maximum Power Point Tracking) involves a lot electronics that is well beyond the scope of IB physics we chose to use a fixed load somewhere in the middle of the power curve. By measuring the voltage we would automatically measure the current and therefore the power.
+
+First we had to estimate the correct resistance for the load. With the 12V 6W parameters one can calculate a current of I=500mA from __P=VI__ and then apply Ohm's law as __R=U/I__ which results in a resitance of R=12/0.5=24 Ohm. Another way is the direct way of __R=U/P=12/6=24 Ohm__. Half the power would be achieved with ca. 50 Ohm and 100 Ohm creates 25% of the maximum power on the load. Since we had plenty 1 kOhm resistors we soldered 9 of them in parallel and added 2 series of two 1 kOhm resistors from the voltage divider as well. The circuid diagram looks like this:
+
+![load circuit for the solar panel and voltage measurement](load_circuit_solarpanel.jpg)
+
 > 2020/02/27
 <img src="pic/hybrid.jpg" width="30%" align="right">
 
