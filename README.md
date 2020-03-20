@@ -1,5 +1,6 @@
 # Solarmeter
-Output power of a solar panel measured over weeks
+
+This project continuously measures the output power of a solar cell. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN.
 
 ## Setup
 
@@ -23,6 +24,38 @@ We take a ESP32 for measuring and transmitting the data over Wifi.
 
 Power from the solar cell, backup LiPo battery with a JST-PH 2.0 connector? What is the size from Adafruit Feather? Let's see and look for the power consumption as well ...
 
+## Software
+
+``` c
+/*
+  ReadAnalogVoltage
+
+  Reads an analog input on pin 0, converts it to voltage, and prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  http://www.arduino.cc/en/Tutorial/ReadAnalogVoltage
+*/
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
+  float voltage = sensorValue * (5.0 / 1023.0);
+  // print out the value you read:
+  Serial.println(voltage);
+}
+```
+
 ## Measurements and results
 
 Data account is created, will be linked soon.
@@ -41,7 +74,7 @@ For about an hour during assigned study we tried to measure the characteristics 
 
 __Solution 1:__ A voltage divider made of two 1 kiloOhm resistor divided the output by 2 and moved it into the voltage limit of the probe. A successful reading now indicated the second problem: Without any load the output voltage is almost constant, since it mainly derives from the band gap in the semiconductor. This is well illustrated in this [graph from wikipedia](https://commons.wikimedia.org/wiki/File:Actual_output_in_volts,_amps,_and_wattage_from_a_100_Watt_Solar_module_in_August.jpg):
 
-<img src="pic/hourly_production.jpg" align="center" width="80%">
+<img src="pic/hourly_production.jpg" width="80%" align="center">
 
 Note that only the current increases during daytime. Since the power is a product of voltage and current, the power increases as well.
 
@@ -65,5 +98,3 @@ I finally create a Github repository to document this project. The ESP32 were de
 The ADC of the ESP32 is not very linear. But we want to use it to measure the voltage of the solar pannel under different load situations. There might be a compensation function. The procedure and measurement was done by [Fernando Koyanagi](https://www.fernandok.com/) from Florianópolis in Brazil and published in [instructables](https://www.instructables.com/id/Professionals-Know-This/).
 
 ![ADC reading](pic/adc_esp32.jpg)
-
-To the code ...
