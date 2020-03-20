@@ -17,15 +17,19 @@ Data account is created, will be linked soon.
 
 ## History
 
-> 2020/03/18
+> 2019/12/03
 
-I finally create a Github repository to document this project
+Interview with Tom about his EE project about renewable energy in Vietnam. As for an EE (extended essay in the IB international baccalaureate) in physics an experiment should be included. And we can investigate the wind and solar power here in Nha Be on the roof of the 5th floor of the school building.
+
+To collect data I created a new Google account as aisvn.data for emails and communication (MQTT, IFTTT). 
 
 > 2020/02/27
 <img src="pic/hybrid.jpg" width="30%" align="right">
 
 The hybrid wind solar power generator arrives - despite the corona virus outbreak in China. Declarations with customs and DHL took some time, but it's now here. Other parts will be ordered locally.
 
-> 2010/12/10
+> 2020/03/18
 
-Tom starts with his EE idea about renewable energies in Vietnam and their potential. As for an EE (extended essay in the IB international baccalaureate) in physics an experiment should be included. We talk about wind power and solar power.
+I finally create a Github repository to document this project. The ESP32 were delivered some weeks ago. Now I got the LiPo batteries as well. Connector for the feather-style boards: __JST PH 2pin__ for reference! Purcheased at [ICDAYROI](https://icdayroi.com/) in Thủ Đức.
+
+To the code ...
