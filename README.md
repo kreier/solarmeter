@@ -26,6 +26,13 @@ We take a ESP32 for measuring and transmitting the data over Wifi.
 
 Power from the solar cell, backup LiPo battery with a JST-PH 2.0 connector? What is the size from Adafruit Feather? Let's see and look for the power consumption as well ...
 
+I ordered some setup materials:
+
+- [Solar panel 12V 3W 145x145mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-3w-12v) enough for ESP32?
+- [Solar panel 12V 1.5W 115x85mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-1-5w-12v) I guess that's what Tom uses
+- [Solar panel 5V .25W 45x45mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-0-25w-5v) small and cheap - sufficient? Without step down converter?
+- [Step down 5V](https://www.thegioiic.com/products/mach-giam-ap-usb-ra-5v3a)
+
 ## Software
 
 ``` c
