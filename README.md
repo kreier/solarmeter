@@ -28,10 +28,14 @@ Power from the solar cell, backup LiPo battery with a JST-PH 2.0 connector? What
 
 I ordered some setup materials:
 
+<img src="pic/TTGO_ESP32.jpg" width="30" align="right">
+
 - [Solar panel 12V 3W 145x145mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-3w-12v) enough for ESP32?
 - [Solar panel 12V 1.5W 115x85mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-1-5w-12v) I guess that's what Tom uses
 - [Solar panel 5V .25W 45x45mm](https://www.thegioiic.com/products/tam-nang-luong-mat-troi-0-25w-5v) small and cheap - sufficient? Without step down converter?
-- [Step down 5V](https://www.thegioiic.com/products/mach-giam-ap-usb-ra-5v3a)
+- [Step down to 5V](https://www.thegioiic.com/products/mach-giam-ap-usb-ra-5v3a)
+- [ESP32 with display, USB-C](https://www.lazada.vn/products/i325250821.html) 222000 VND - $ 9.40 with 1.14" display
+- Battery 500 mAh for ...
 
 ## Software
 
