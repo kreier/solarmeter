@@ -129,3 +129,9 @@ The ordered TTGO ESP32 mainboard is pretty good! I ordered it mainly for the inc
 ![Pin layout TTGO T-Display V1.0](pic/TTGO_pin.jpg)
 
 To program the display and some voltages, example code can be found at [https://github.com/Xinyuan-LilyGO/TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display)
+
+> 2020/04/07
+
+A second TTGO ESP32 arrived and is set to be programmed:
+
+![Two ESP32 TTGO](pic/ttgo.jpg)
