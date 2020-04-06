@@ -135,3 +135,8 @@ To program the display and some voltages, example code can be found at [https://
 A second TTGO ESP32 arrived and is set to be programmed:
 
 ![Two ESP32 TTGO](pic/ttgo.jpg)
+
+Without programming TTGO installed some software on the module. On the 135x240 display you get 22x30 characters with a 6x8 font. That's almost as much as my first ZX81 with 32x24. You can scan for nearby 2.4GHz networks, check the power supply and go into sleep mode. The last one is of interest for our project and the power consumption with these standard settings will be tested next.
+
+
+![TTGO-T-Display modes](pic/ttgo_disp1.jpg)
