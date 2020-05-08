@@ -163,4 +163,7 @@ School is back open since May 4th, students are back since May 5th - and now we 
 
 > 2020/05/08
 
-The wind generator is delivered as well!
+The wind generator arrived just one day later! Looked at location on top of the roof, 6th floor in Nha Be. Empty room for equipment is there, rain proved, and space for the 5 wired from solar and wind to the control unit. Maybe next week start first test setup?
+
+![Wind generator](pic/2020-05-08_wind.jpg)
+
