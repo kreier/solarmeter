@@ -140,3 +140,17 @@ Without programming TTGO installed some software on the module. On the 135x240 d
 
 
 ![TTGO-T-Display modes](pic/ttgo_disp1.jpg)
+
+> 2020/04/28
+
+With an external power supply we can check the power consumption of the TTGO. The values over USB were rather high, but it has a 3.7 LiPo battery connector and the power consumption there is significantly lower, most likely because the 5V to 3.3V step-down converter is not needed. Here are the values for 3.7 Volt over battery:
+
+- Power on, start up and screen on: 68 mA
+- WiFi scan for nearby hotspots: 108 mA
+- Sleep, waiting for interrupt from key pressed: 0.35 mA
+
+With a 1000 mAh battery and the given voltage we can calculate the power consumption and projected runtime:
+
+- Screen on: 252 mW, runtime 14 hours 42 minutes
+- WiFi on: 399 mW, runtime 9 hours 15 minutes
+- Hibernate: 1.3 mW, runtime 2857 hours - or 119 days
