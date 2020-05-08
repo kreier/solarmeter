@@ -154,3 +154,13 @@ With a 1000 mAh battery and the given voltage we can calculate the power consump
 - Screen on: 252 mW, runtime 14 hours 42 minutes
 - WiFi on: 399 mW, runtime 9 hours 15 minutes
 - Hibernate: 1.3 mW, runtime 2857 hours - or 119 days
+
+> 2020/05/07
+
+School is back open since May 4th, students are back since May 5th - and now we got the solar panel and the battery! Time to find a place on the roof in Nha Be and control software to collect and transmit data.
+
+![Solar panel](pic/2020-05-07_solar.jpg)
+
+> 2020/05/08
+
+The wind generator is delivered as well!
