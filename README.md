@@ -178,3 +178,137 @@ We installed the 60W solar module on the roof of our school AISVN and connected 
 ![solar installation 2020/05/15](pic/2020-05-15_solar.jpg)
 
 The stand for the 600W wind generator will be welded in the next week.
+
+> 2020/05/17
+
+First successful setup with WEMOS LoLin32 board, 2000 mAh battery and two 1kOhm voltage divider for input on pin 34. Voltage measurement every 2 minutes, upload via IFTTT and webhooks to google sheet, then deep sleep. Setup:
+
+![Little solar setup](pic/2020-05-16_setup.jpg)
+
+Code:
+
+``` C 
+// Solarmeter first attempt
+// Inspired by https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/
+ 
+#include <WiFi.h>
+#include <Wire.h>
+
+const char* ssid     = "REPLACE_WITH_YOUR_SSID";
+const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* resource = "/trigger/solar_reading/with/key/nAZjOphL3d-ZO4N3k64-1A7gTlNSrxMJdmqy3";
+const char* server = "maker.ifttt.com";
+
+uint64_t uS_TO_S_FACTOR = 1000000;  // Conversion factor for micro seconds to seconds
+uint64_t TIME_TO_SLEEP = 120;
+int adcValue = 0;
+
+void setup() {
+  Serial.begin(115200); 
+  delay(1000);
+
+  initWifi();
+  makeIFTTTRequest();
+    
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);    
+  Serial.println("Going to sleep now");
+  esp_deep_sleep_start(); // start deep sleep for 120 seconds (2 minutes)
+}
+
+void loop() {
+  // sleeping so wont get here 
+}
+
+// Establish a Wi-Fi connection with your router
+void initWifi() {
+  Serial.print("Connecting to: "); 
+  Serial.print(ssid);
+  WiFi.begin(ssid, password);  
+
+  int timeout = 10 * 4; // 10 seconds
+  while(WiFi.status() != WL_CONNECTED  && (timeout-- > 0)) {
+    delay(250);
+    Serial.print(".");
+  }
+  Serial.println("");
+
+  if(WiFi.status() != WL_CONNECTED) {
+     Serial.println("Failed to connect, going back to sleep");
+  }
+
+  Serial.print("WiFi connected in: "); 
+  Serial.print(millis());
+  Serial.print(", IP address: "); 
+  Serial.println(WiFi.localIP());
+}
+
+// Make an HTTP request to the IFTTT web service
+void makeIFTTTRequest() {
+  Serial.print("Connecting to "); 
+  Serial.print(server);
+  
+  WiFiClient client;
+  int retries = 5;
+  while(!!!client.connect(server, 80) && (retries-- > 0)) {
+    Serial.print(".");
+  }
+  Serial.println();
+  if(!!!client.connected()) {
+    Serial.println("Failed to connect...");
+  }
+  
+  Serial.print("Request resource: "); 
+  Serial.println(resource);
+
+  // raw and converted voltage reading
+  adcValue = analogRead( 34 );
+  String jsonObject = String("{\"value1\":\"") + adcValue + "\",\"value2\":\"" + (adcValue * 2.4) + "\",\"value3\":\"" + millis() + "\"}";
+  
+  client.println(String("POST ") + resource + " HTTP/1.1");
+  client.println(String("Host: ") + server); 
+  client.println("Connection: close\r\nContent-Type: application/json");
+  client.print("Content-Length: ");
+  client.println(jsonObject.length());
+  client.println();
+  client.println(jsonObject);
+        
+  int timeout = 5 * 10; // 5 seconds             
+  while(!!!client.available() && (timeout-- > 0)){
+    delay(100);
+  }
+  if(!!!client.available()) {
+    Serial.println("No response...");
+  }
+  while(client.available()){
+    Serial.write(client.read());
+  }
+  
+  Serial.println("\nclosing connection");
+  client.stop(); 
+}
+
+```
+
+And for the first day we got this graph:
+
+![Voltage output during the day](data/2020-05-17_voltage.jpg)
+
+Power measurements with the WEMOS LoLin32 lite:
+
+- On 40 mA, regardless of LED on pin 22, 148 mW
+- WiFi 116 mA fluctuating (DHCP, http request), 430 mW, full cycle < 1 second (0.7 s average)
+- Sleep 0.06 mA, 0.22 mW - runtime with 1000 mAh battery: 16666 hours, or 694 days
+
+Power measurements with LilyGo TTGO T-Koala with WROVER-B and USB-C
+
+- On 35.8 mA, power LED is always on, 133 mW
+- WiFi 100 mA (spikes in oscilloscope, DHCP, http request), 370 mW, full cycle < 1 second (0.7 s average)
+- Sleep 0.79 mA, 2.9 mW - runtime with 1000 mAh battery: 1265 hours, or 53 days, power LED is ON 
+
+> 2020/05/18
+
+### Power output of 6V 2W solar panel on 39 Ohm resistor
+
+Here is the graph: 
+
+![Voltage output during the second day](data/2020-05-18_voltage.jpg)
