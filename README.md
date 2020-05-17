@@ -103,7 +103,7 @@ Note that only the current increases during daytime. Since the power is a produc
 
 __Solution 2:__ A [MPPT](https://en.wikipedia.org/wiki/Maximum_power_point_tracking) (Maximum Power Point Tracking) involves a lot electronics that is well beyond the scope of IB physics. We chose to use a fixed load somewhere in the middle of the power curve. By measuring the voltage we would automatically measure the current and therefore the power.
 
-First we had to estimate the correct resistance for the load. With the parameters of 12V and 6W one can calculate a current of I=500mA from __P=VI__ and then apply Ohm's law as __R=U/I__ which results in a resitance of R=12/0.5=24 Ohm. Another way is the direct way of __R=U/P=12/6=24 Ω__. Half the power would be achieved with ca. 50 Ohm and 100 Ohm creates 25% of the maximum power on the load. Since we had plenty 1 kOhm resistors we soldered 9 of them in parallel and added 2 series of two 1 kOhm resistors from the voltage divider as well. The circuid diagram looks like this:
+First we had to estimate the correct resistance for the load. With the parameters of 12V and 6W one can calculate a current of I=500mA from __P=VI__ and then apply Ohm's law as __R=U/I__ which results in a resitance of R=12/0.5=24 Ohm. Another way is the direct way of __R=U²/P=12²/6=24 Ω__. Half the power would be achieved with ca. 50 Ohm and 100 Ohm creates 25% of the maximum power on the load. Since we had plenty 1 kOhm resistors we soldered 9 of them in parallel and added 2 series of two 1 kOhm resistors from the voltage divider as well. The circuid diagram looks like this:
 
 ![load circuit for the solar panel and voltage measurement](pic/setup_2020-01-16.jpg)
 
@@ -153,7 +153,7 @@ With a 1000 mAh battery and the given voltage we can calculate the power consump
 
 - Screen on: 252 mW, runtime 14 hours 42 minutes
 - WiFi on: 399 mW, runtime 9 hours 15 minutes
-- Hibernate: 1.3 mW, runtime 2857 hours - or 119 days
+- Hibernate: __1.3 mW__, runtime 2857 hours - or __119 days__
 
 > 2020/05/07
 
@@ -173,7 +173,7 @@ The TTGO can be programmed with MicroPython and [devbis](https://github.com/devb
 
 > 2020/05/15
 
-We installed the 60W solar module on the roof of our school AISVN and connected MPPT controller and 24Ah battery. Now charging over the weekend, then connect my 60W motorcycle lamp to drain the battery every night ...
+We installed the 60W solar module on the roof of our school AISVN and connected MPPT controller and __24Ah__ battery. Now charging over the weekend, then connect my 60W motorcycle lamp to drain the battery every night ...
 
 ![solar installation 2020/05/15](pic/2020-05-15_solar.jpg)
 
@@ -181,7 +181,7 @@ The stand for the 600W wind generator will be welded in the next week.
 
 > 2020/05/17
 
-First successful setup with WEMOS LoLin32 board, 2000 mAh battery and two 1kOhm voltage divider for input on pin 34. Voltage measurement every 2 minutes, upload via IFTTT and webhooks to google sheet, then deep sleep. Setup:
+First successful setup with WEMOS LoLin32 board, 2000 mAh battery and two 1kOhm voltage divider for input on pin 34. Voltage measurement every 2 minutes, upload via __IFTTT__ and webhooks to google sheet, then deep sleep. Setup:
 
 ![Little solar setup](pic/2020-05-16_setup.jpg)
 
@@ -297,7 +297,7 @@ Power measurements with the WEMOS LoLin32 lite:
 
 - On 40 mA, regardless of LED on pin 22, 148 mW
 - WiFi 116 mA fluctuating (DHCP, http request), 430 mW, full cycle < 1 second (0.7 s average)
-- Sleep 0.06 mA, 0.22 mW - runtime with 1000 mAh battery: 16666 hours, or 694 days
+- Sleep 0.06 mA, __0.22 mW__ - runtime with 1000 mAh battery: 16666 hours, or __694 days__
 
 Power measurements with LilyGo TTGO T-Koala with WROVER-B and USB-C
 
