@@ -167,6 +167,8 @@ The wind generator arrived just one day later! Looked at location on top of the 
 
 ![Wind generator](pic/2020-05-08_wind.jpg)
 
+Data: __JLS-500__ with 24V and 500 W
+
 > 2020/05/14
 
 The TTGO can be programmed with MicroPython and [devbis](https://github.com/devbis) created both a [slow python driver](https://github.com/devbis/st7789py_mpy/) for the display ST7789 as well as a [fast C variant](https://github.com/devbis/st7789_mpy). Further description of this module [here](https://sites.google.com/site/jmaathuis/arduino/lilygo-ttgo-t-display-esp32). And the tft driver from Loboris is working as well, details in [this instuctable from February 2020](https://www.instructables.com/id/TTGO-color-Display-With-Micropython-TTGO-T-display/). Original data at [LilyGo github](https://github.com/Xinyuan-LilyGO/TTGO-T-Display).
@@ -262,7 +264,8 @@ void makeIFTTTRequest() {
 
   // raw and converted voltage reading
   adcValue = analogRead( 34 );
-  String jsonObject = String("{\"value1\":\"") + adcValue + "\",\"value2\":\"" + (adcValue * 2.4) + "\",\"value3\":\"" + millis() + "\"}";
+  String jsonObject = String("{\"value1\":\"") + adcValue + "\",\"value2\":\"" 
+    + (adcValue * 2.4)   + "\",\"value3\":\"" + millis() + "\"}";
   
   client.println(String("POST ") + resource + " HTTP/1.1");
   client.println(String("Host: ") + server); 
