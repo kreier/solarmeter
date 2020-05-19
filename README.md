@@ -189,9 +189,9 @@ First successful setup with WEMOS LoLin32 board, 2000 mAh battery and two 1kOhm 
 
 Code:
 
-``` C 
-// Solarmeter first attempt
-// Inspired by https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/
+``` c
+// Solarmeter first attempt, inspired by 
+// https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/
  
 #include <WiFi.h>
 #include <Wire.h>
@@ -315,3 +315,10 @@ Power measurements with LilyGo TTGO T-Koala with WROVER-B and USB-C
 Here is the graph: 
 
 ![Voltage output during the second day](data/2020-05-18_voltage.jpg)
+
+> 2020/05/19
+
+With a load of 3 kOhm we get almost the free floating voltage of the solar cell. At 7 Volt the test circuit only consumes 2.3 mA or 16 mW - while having a maximum power of 2000 mW - this is 0.8% of what it should be able to deliver. Thats the output over the day:
+
+![Voltage output during the third day](data/2020-05-19_voltage.jpg)
+
