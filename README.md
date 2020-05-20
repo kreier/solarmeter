@@ -321,4 +321,5 @@ Here is the graph:
 With a load of 3 kOhm we get almost the free floating voltage of the solar cell. At 7 Volt the test circuit only consumes 2.3 mA or 16 mW - while having a maximum power of 2000 mW - this is 0.8% of what it should be able to deliver. Thats the output over the day:
 
 ![Voltage output during the third day](data/2020-05-19_voltage.jpg)
+![Voltage output during the 4th day](data/2020-05-20_voltage.jpg)
 
