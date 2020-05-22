@@ -294,7 +294,7 @@ void makeIFTTTRequest() {
 
 ```
 
-And for the first day we got this graph:
+And for the first day (May 17th, 2020) we got this graph:
 
 ![Voltage output during the day](data/2020-05-17_voltage.jpg)
 
@@ -325,3 +325,8 @@ With a load of 3 kOhm we get almost the free floating voltage of the solar cell.
 ![Voltage output during the third day](data/2020-05-19_voltage.jpg)
 ![Voltage output during the 4th day](data/2020-05-20_voltage.jpg)
 
+> 2020/02/21
+
+We installed the second ESP32 next to our MPPT Solar controller and measure for the beginning the voltage of the solar panel and the battery. Observations: The MPPT does not apply for the solar panel, it is directly connected to the battery and looses therefore a lot of energy. Secondly: The floating limit for our battery was set too low at 13.8 Volt, so it was never really charged since installation on May 15th. New limit is 14.7 Volt floating and overvoltage limit 14.8 Volt. Third - the lower voltage limit was set too low at 10.8 Volt, it is adjusted now at 11.0 Volt. The load was reduced from 120 W to 60 W. Let's see if the weekend brings an improvement. Here is the data from the first day (second half of May 21st, 2020):
+
+![values and voltage battery from first day](pic/2020-05-21_nhabe.jpg)
