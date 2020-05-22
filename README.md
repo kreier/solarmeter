@@ -2,7 +2,7 @@
 
 This project continuously measures the output power of a solar cell. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. Our first result from AISVN with the solar panel looks like this:
 
-![voltage over a day](aisvn/data_2020-05-21.jpg)
+![voltage over a day](aisvn/data/data_2020-05-21.jpg)
 
 ## Setup
 
@@ -192,7 +192,7 @@ First successful setup with WEMOS LoLin32 board, 2000 mAh battery and two 1kOhm 
 Code:
 
 ``` c
-// Solarmeter first attempt, inspired by 
+// Solarmeter first attempt (all Serial.print removed), inspired by 
 // https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/
  
 #include <WiFi.h>
@@ -208,61 +208,27 @@ uint64_t TIME_TO_SLEEP = 120;
 int adcValue = 0;
 
 void setup() {
-  Serial.begin(115200); 
   delay(1000);
-
   initWifi();
   makeIFTTTRequest();
-    
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);    
-  Serial.println("Going to sleep now");
   esp_deep_sleep_start(); // start deep sleep for 120 seconds (2 minutes)
 }
 
-void loop() {
-  // sleeping so wont get here 
+void loop() {  // sleeping so wont get here
 }
 
-// Establish a Wi-Fi connection with your router
-void initWifi() {
-  Serial.print("Connecting to: "); 
-  Serial.print(ssid);
+void initWifi() {  // Establish a Wi-Fi connection with your router
   WiFi.begin(ssid, password);  
-
   int timeout = 10 * 4; // 10 seconds
   while(WiFi.status() != WL_CONNECTED  && (timeout-- > 0)) {
     delay(250);
-    Serial.print(".");
   }
-  Serial.println("");
-
-  if(WiFi.status() != WL_CONNECTED) {
-     Serial.println("Failed to connect, going back to sleep");
-  }
-
-  Serial.print("WiFi connected in: "); 
-  Serial.print(millis());
-  Serial.print(", IP address: "); 
-  Serial.println(WiFi.localIP());
 }
 
-// Make an HTTP request to the IFTTT web service
-void makeIFTTTRequest() {
-  Serial.print("Connecting to "); 
-  Serial.print(server);
-  
+void makeIFTTTRequest() {  // Make an HTTP request to the IFTTT web service
   WiFiClient client;
   int retries = 5;
-  while(!!!client.connect(server, 80) && (retries-- > 0)) {
-    Serial.print(".");
-  }
-  Serial.println();
-  if(!!!client.connected()) {
-    Serial.println("Failed to connect...");
-  }
-  
-  Serial.print("Request resource: "); 
-  Serial.println(resource);
 
   // raw and converted voltage reading
   adcValue = analogRead( 34 );
@@ -281,20 +247,15 @@ void makeIFTTTRequest() {
   while(!!!client.available() && (timeout-- > 0)){
     delay(100);
   }
-  if(!!!client.available()) {
-    Serial.println("No response...");
-  }
   while(client.available()){
     Serial.write(client.read());
   }
-  
-  Serial.println("\nclosing connection");
   client.stop(); 
 }
 
 ```
 
-And for the first day (May 17th, 2020) we got this graph:
+And for the first day in Phy My Hung (May 17th, 2020) we got this graph:
 
 ![Voltage output during the day](data/2020-05-17_voltage.jpg)
 
