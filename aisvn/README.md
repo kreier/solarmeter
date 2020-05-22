@@ -2,7 +2,7 @@
 
 Recent measurements
 
-![First day values](data_2020-05-21.jpg)
+![First day values](data/data_2020-05-21.jpg)
 
 ![Voltages May 21st](../pic/2020-05-21_aisvn.jpg)
 
