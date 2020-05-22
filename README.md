@@ -1,6 +1,8 @@
 # Solarmeter
 
-This project continuously measures the output power of a solar cell. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN.
+This project continuously measures the output power of a solar cell. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. Our first result from AISVN with the solar panel looks like this:
+
+![voltage over a day](aisvn/data_2020-05-21.jpg)
 
 ## Setup
 
