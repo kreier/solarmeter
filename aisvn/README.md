@@ -19,51 +19,33 @@ This initial sofware is running on the ESP32:
  
 #include <WiFi.h>
 #include <Wire.h>
-
 RTC_DATA_ATTR int bootCount = 0;
 
-// Replace with your SSID and Password
-const char* ssid     = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* ssid     = "REPLACE_WITH_YOUR_SSID";      // Replace with your SSID and Password
+const char* password = "REPLACE_WITH_YOUR_PASSWORD";  // Replace with your
+const char* resource = "/trigger/value/with/key/placeyourownkey";  //  unique IFTTT URL resource
+const char* server = "maker.ifttt.com"; // Maker Webhooks IFTTT
 
-// Replace with your unique IFTTT URL resource
-const char* resource = "/trigger/value/with/key/placeyourownkeyherebitte";
-
-// Maker Webhooks IFTTT
-const char* server = "maker.ifttt.com";
-
-// Time to sleep
 uint64_t uS_TO_S_FACTOR = 1000000;  // Conversion factor for micro seconds to seconds
-// sleep for 2 minutes = 120 seconds
-uint64_t TIME_TO_SLEEP = 120;
+uint64_t TIME_TO_SLEEP = 120; // sleep for 2 minutes = 120 seconds
 
 int voltage[7] = {0, 0, 0, 0, 0, 0, 0};       // all voltages in millivolt
 int pins[7] = {34, 35, 32, 33, 26, 22, 19};   // solar, battery, load_1, load_2, LiPo, wind, dump
-int ledPin = 22;
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);  
-  delay(50);
-  digitalWrite(ledPin, HIGH);
   bootCount++;
   delay(1000);
   measureVoltages();
 
-  digitalWrite(ledPin, LOW);  
   initWifi();
   makeIFTTTRequest();
-  digitalWrite(ledPin, HIGH); 
 
   // enable timer deep sleep
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);    
-  Serial.println("Going to sleep now");
-  // start deep sleep for 120 seconds (2 minutes)
   esp_deep_sleep_start();
 }
 
-void loop() {
-  // sleeping so wont get here 
+void loop() {    // sleeping so wont get here 
 }
 
 // Establish a Wi-Fi connection with your router
