@@ -2,6 +2,10 @@
 
 Recent measurements
 
+![First day values](data_2020-05-21.jpg)
+
+![Voltages May 21st](../pic/2020-05-21_aisvn.jpg)
+
 ![Voltage output during the third day](../data/2020-05-19_voltage.jpg)
 
 ![Voltage output during the second day](../data/2020-05-18_voltage.jpg)
