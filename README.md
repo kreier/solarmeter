@@ -4,6 +4,10 @@ This project continuously measures the output power of a solar cell. The data is
 
 ![voltage over a day](aisvn/data/data_2020-05-21.jpg)
 
+![voltage in phu my hung](pic/May2020_6V_2W_panel.jpg)
+
+![power in phu my hung](pic/May2020_power.jpg)
+
 ## Setup
 
 The initial setup from December 2019 requires a Laptop with Vernier software to measure just one data point. The circuit looks like this:
