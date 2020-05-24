@@ -210,7 +210,7 @@ Code:
 
 const char* ssid     = "REPLACE_WITH_YOUR_SSID";
 const char* password = "REPLACE_WITH_YOUR_PASSWORD";
-const char* resource = "/trigger/solar_reading/with/key/nAZjOphL3d-ZO4N3k64-1A7gTlNSrxMJdmqy3";
+const char* resource = "/trigger/value/with/key/create-one";
 const char* server = "maker.ifttt.com";
 
 uint64_t uS_TO_S_FACTOR = 1000000;  // Conversion factor for micro seconds to seconds
@@ -256,9 +256,6 @@ void makeIFTTTRequest() {  // Make an HTTP request to the IFTTT web service
   int timeout = 5 * 10; // 5 seconds             
   while(!!!client.available() && (timeout-- > 0)){
     delay(100);
-  }
-  while(client.available()){
-    Serial.write(client.read());
   }
   client.stop(); 
 }
