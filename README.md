@@ -14,15 +14,11 @@ The initial setup from December 2019 requires a Laptop with Vernier software to 
 
 ![load circuit for the solar panel and voltage measurement](pic/setup_2020-01-16.jpg)
 
-For the future design of April 2020 the voltage is measured by the ESP32 and the value transfered to a database in the internet every 5 minutes. This gives 288 data points per day. An article at [randomnerdtutorials](https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/) explains the setup and programming very well;
+This is the setup in June 2020:
 
-![Setup of ESP32](pic/analog_input_esp32.jpg)
+**still to come**
 
-Additionally there are 4 digital switches for different loads planned. The ESP32 is activating them prior to the measurement and can combine the swithces for 16 different load values. The setup now looks like this:
 
-![adjustable load setup ESP32](pic/setup_2020-03-20.jpg)
-
-With the 4 switches we can create 16 datapoints, that the ESP32 can read in 12 bit. Every 5 minutes we create therefore 24 byte of data. Over a day this accumulates to 6912 byte and in a year all data collected is 2.5 MByte.
 
 
 
@@ -127,6 +123,16 @@ I finally create a Github repository to document this project. The ESP32 were de
 The ADC of the ESP32 is not very linear. But we want to use it to measure the voltage of the solar pannel under different load situations. There might be a compensation function. The procedure and measurement was done by [Fernando Koyanagi](https://www.fernandok.com/) from Florianópolis in Brazil and published in [instructables](https://www.instructables.com/id/Professionals-Know-This/).
 
 ![ADC reading](pic/adc_esp32.jpg)
+
+For the future design of April 2020 the voltage is measured by the ESP32 and the value transfered to a database in the internet every 5 minutes. This gives 288 data points per day. An article at [randomnerdtutorials](https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/) explains the setup and programming very well;
+
+![Setup of ESP32](pic/analog_input_esp32.jpg)
+
+Additionally there are 4 digital switches for different loads planned. The ESP32 is activating them prior to the measurement and can combine the swithces for 16 different load values. The setup now looks like this:
+
+![adjustable load setup ESP32](pic/setup_2020-03-20.jpg)
+
+With the 4 switches we can create 16 datapoints, that the ESP32 can read in 12 bit. Every 5 minutes we create therefore 24 byte of data. Over a day this accumulates to 6912 byte and in a year all data collected is 2.5 MByte.
 
 > 2020/04/01
 
@@ -275,9 +281,9 @@ Power measurements with LilyGo TTGO T-Koala with WROVER-B and USB-C
 - WiFi 100 mA (spikes in oscilloscope, DHCP, http request), 370 mW, full cycle < 1 second (0.7 s average)
 - Sleep 0.79 mA, 2.9 mW - runtime with 1000 mAh battery: 1265 hours, or 53 days, power LED is ON 
 
-> 2020/05/18
-
 ### Power output of 6V 2W solar panel on 39 Ohm resistor
+
+> 2020/05/18
 
 Here is the graph: 
 
@@ -290,8 +296,18 @@ With a load of 3 kOhm we get almost the free floating voltage of the solar cell.
 ![Voltage output during the third day](data/2020-05-19_voltage.jpg)
 ![Voltage output during the 4th day](data/2020-05-20_voltage.jpg)
 
-> 2020/02/21
+> 2020/05/21
 
 We installed the second ESP32 next to our MPPT Solar controller and measure for the beginning the voltage of the solar panel and the battery. Observations: The MPPT does not apply for the solar panel, it is directly connected to the battery and looses therefore a lot of energy. Secondly: The floating limit for our battery was set too low at 13.8 Volt, so it was never really charged since installation on May 15th. New limit is 14.7 Volt floating and overvoltage limit 14.8 Volt. Third - the lower voltage limit was set too low at 10.8 Volt, it is adjusted now at 11.0 Volt. The load was reduced from 120 W to 60 W. Let's see if the weekend brings an improvement. Here is the data from the first day (second half of May 21st, 2020):
 
 ![values and voltage battery from first day](pic/2020-05-21_nhabe.jpg)
+
+### Peak voltage and power output of 6 Volt 2 Watt solar panel
+
+> 2020/05/25
+
+I combined several measurements from May 18th to May 24th with different loads on the 6 Volt 2 Watt solar panel that was placed in Phu My Hung to an overview from 5:00 AM tp 7:00 PM:
+
+![voltage in phu my hung](pic/May2020_6V_2W_panel.jpg)
+
+![power in phu my hung](pic/May2020_power.jpg)
