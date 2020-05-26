@@ -4,6 +4,8 @@ This project continuously measures the output power of a solar cell. The data is
 
 ![voltage over a day](aisvn/data/data_2020-05-21.jpg)
 
+![battery week](aisvn/data/2020-05-26_battery_week.jpg)
+
 ![voltage in phu my hung](pic/May2020_6V_2W_panel.jpg)
 
 ![power in phu my hung](pic/May2020_power.jpg)
