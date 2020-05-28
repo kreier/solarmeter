@@ -310,3 +310,19 @@ I combined several measurements from May 18th to May 24th with different loads o
 ![voltage in phu my hung](pic/May2020_6V_2W_panel.jpg)
 
 ![power in phu my hung](pic/May2020_power.jpg)
+
+### Results from first week at AISVN
+
+> 2020/05/28
+
+We start with a 60 Watt drain resistor that switches on after sunset (6:00 PM) for a programmed time of 4 hours. Unfortunately it drains the battery in 3.5 hours.
+
+![May 21st](aisvn/data/2020-05-21_all.jpg)
+![May 22nd](aisvn/data/2020-05-22_all.jpg)
+
+Rainy Saturday, battery charged very little, drained after 1.5 hours.
+![May 23rd](aisvn/data/2020-05-23_all.jpg)
+![May 24th](aisvn/data/2020-05-24_all.jpg)
+![May 25th](aisvn/data/2020-05-25_all.jpg)
+![May 26th](aisvn/data/2020-05-26_all.jpg)
+![May 27th](aisvn/data/2020-05-27_all.jpg)
