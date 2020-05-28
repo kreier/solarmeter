@@ -323,6 +323,12 @@ We start with a 60 Watt drain resistor that switches on after sunset (6:00 PM) f
 Rainy Saturday, battery charged very little, drained after 1.5 hours.
 ![May 23rd](aisvn/data/2020-05-23_all.jpg)
 ![May 24th](aisvn/data/2020-05-24_all.jpg)
+
+Switch from a 60 Watt load to a 5 Watt load for 4 hours after sunset.
 ![May 25th](aisvn/data/2020-05-25_all.jpg)
+
+Battery fully charged, controller disconnects solar panel during the day. Load now on for 7 hours after sunset.
 ![May 26th](aisvn/data/2020-05-26_all.jpg)
+
+Battery drained again with 60 Watt load from 11:00 AM to 5:00 PM. Then installed new MPPT solar charger.
 ![May 27th](aisvn/data/2020-05-27_all.jpg)
