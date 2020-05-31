@@ -332,3 +332,11 @@ Battery fully charged, controller disconnects solar panel during the day. Load n
 
 Battery drained again with 60 Watt load from 11:00 AM to 5:00 PM. Then installed new MPPT solar charger.
 ![May 27th](aisvn/data/2020-05-27_all.jpg)
+
+### Measure the power - resistor for current in line
+
+> 2020/06/01
+
+We put a 0.1 Ohm resistor in series with  the positive wire of the solar panel to determine the current from the voltage drop. Even in the case of 3 Ampere this accounts only to 0.3 Volt and less than a Watt of heat loss.
+
+![circuit diagram](pic/2020-06-01_powerbox.jpg)
