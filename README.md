@@ -333,6 +333,15 @@ Battery fully charged, controller disconnects solar panel during the day. Load n
 Battery drained again with 60 Watt load from 11:00 AM to 5:00 PM. Then installed new MPPT solar charger.
 ![May 27th](aisvn/data/2020-05-27_all.jpg)
 
+With MPPT higher solar voltage for charging - for increased efficiency. Compare May 28th to May 25th.
+![May 28th](aisvn/data/2020-05-28_all.jpg)
+![May 29th](aisvn/data/2020-05-29_all.jpg)
+
+Graduation for Seniors 2020 started 3:00 PM after the thunderstorm 1:00 PM - solar panel went off.
+![May 30th](aisvn/data/2020-05-30_all.jpg)
+![May 31th](aisvn/data/2020-05-31_all.jpg)
+
+
 ### Measure the power - resistor for current in line
 
 > 2020/06/01
