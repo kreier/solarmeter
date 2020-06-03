@@ -349,3 +349,9 @@ Graduation for Seniors 2020 started 3:00 PM after the thunderstorm 1:00 PM - sol
 We put a 0.1 Ohm resistor in series with  the positive wire of the solar panel to determine the current from the voltage drop. Even in the case of 3 Ampere this accounts only to 0.3 Volt and less than a Watt of heat loss.
 
 ![circuit diagram](pic/2020-06-01_powerbox.jpg)
+
+> 2020/06/02
+
+The powerbox was finished. The total resistance is closer to 0.122 Ohm. The voltage drop reading has therefore to be multiplied by 8.2 to get the current reading for the solar panel input. That's the finished box:
+
+![finished box](pic/2020-06-02_powerbox.jpeg)
