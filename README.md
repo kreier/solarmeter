@@ -355,3 +355,10 @@ We put a 0.1 Ohm resistor in series with  the positive wire of the solar panel t
 The powerbox was finished. The total resistance is closer to 0.122 Ohm. The voltage drop reading has therefore to be multiplied by 8.2 to get the current reading for the solar panel input. That's the finished box:
 
 ![finished box](pic/2020-06-02_powerbox.jpeg)
+
+> 2020/06/05
+
+The T-Koala has some direct pins, for example for the battery - it's easier to connect to them to determine the voltage of the LiPo. Picture and pinout:
+
+![T-Koala from TTGO](pic/T-Koala.jpg)
+
