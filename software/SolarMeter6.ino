@@ -147,25 +147,21 @@ void measureVoltages() {
       voltage[i] += analogRead( pins[i] );
     }
     voltage[i] = voltage[i] / 100;
-    // conversion integer to voltage
-    //voltage[i] = int( voltage[i] * 0.826 + 150 );
-    //if( voltage[i] == 150 ) voltage[i] = 0;
-    //if( voltage[i] > 3300 ) voltage[i] = 3300;
     Serial.print(voltage[i]);
     Serial.print("  ");
   }
   // conversion to voltage prior to voltage divider
   //    32,      33,       34,       35,   14,   26,   27,     12,   13
   // solar, battery, currentA, currentB, load, wind, dump, solar2, LiPo  
-  // voltage[0] = int((4096 - voltage[0]) * 7.52 - 1000);  // pin32 solar    voltage divider 10k : 1.2 k Ohm 1:1
-  // voltage[1] = int((4096 - voltage[1]) * 7.52 - 1000);  // pin33 battery  voltage divider 10k : 1.2 k Ohm 1:1
-  // voltage[2] = int((voltage[2]) * 0.804 + 129);         // pin34 voltage solar minus green LED
-  // voltage[3] = int((voltage[3]) * 0.804 + 129);         // pin35 voltage solar minus green LED minus 0.1 Ohm serial
-  // voltage[4] = int((4096 - voltage[4]) * 7.52 - 1000);  // pin14 load     voltage divider 10k : 1.2 k Ohm 1:1
-  // voltage[5] = int((4096 - voltage[5]) * 7.52 - 1000);  // pin26 wind     voltage divider 10k : 1.2 k Ohm 1:1
-  // voltage[6] = int((voltage[6]) * 1.608 + 258);         // pin27 dump     not connected yet
-  // voltage[7] = int((voltage[7]) * 4.583 + 735);         // pin12 Solar2   voltage divider 4.7k : 1k
-  // voltage[8] = int((voltage[8]) * 1.608 + 258);         // pin13 LiPo     voltage divider 100kOhm 2:1
+  voltage[0] = int((4096 - voltage[0]) * 7.52 - 1000);  // pin32 solar    voltage divider 10k : 1.2 k Ohm 1:1
+  voltage[1] = int((4096 - voltage[1]) * 7.52 - 1000);  // pin33 battery  voltage divider 10k : 1.2 k Ohm 1:1
+  voltage[2] = int((voltage[2]) * 0.804 + 129);         // pin34 voltage solar minus green LED
+  voltage[3] = int((voltage[3]) * 0.804 + 129);         // pin35 voltage solar minus green LED minus 0.1 Ohm serial
+  voltage[4] = int((4096 - voltage[4]) * 7.52 - 1000);  // pin14 load     voltage divider 10k : 1.2 k Ohm 1:1
+  voltage[5] = int((4096 - voltage[5]) * 7.52 - 1000);  // pin26 wind     voltage divider 10k : 1.2 k Ohm 1:1
+  voltage[6] = int((voltage[6]) * 1.608 + 258);         // pin27 dump     not connected yet
+  voltage[7] = int((voltage[7]) * 4.583 + 735);         // pin12 Solar2   voltage divider 4.7k : 1k
+  voltage[8] = int((voltage[8]) * 1.608 + 258);         // pin13 LiPo     voltage divider 100kOhm 2:1
   Serial.print("Boot number: ");
   Serial.println(bootCount);  
   Serial.print("Millisecond to measure: ");
