@@ -374,7 +374,7 @@ And I installed it after sunset to get the first measurements. It's installed pa
 
 After a weekend of measurement the system is working and delivered the first measured current data - and some strange voltage behaviour once the load switched on.
 
-![Data Monday](pic/2020-06-08_data.jpg)
+![Data Monday](pic/2020-06-06_data.jpg)
 
 The power box and MPPT controller measured and displayed their data effectively.
 
