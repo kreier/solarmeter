@@ -368,4 +368,18 @@ And I finished the soldering of the board with several voltage dividers and two 
 
 And I installed it after sunset to get the first measurements. It's installed parallel to the other ESP32 that operated just with 2 voltage dividers for the last 2 weeks - which will cause weired values because of wrong reference levels - and pin26 of the ESP.
 
-![board v0.1](pic/2020-06-05_setup.jpg)
+![Setup Friday](pic/2020-06-05_setup.jpg)
+
+> 2020/06/08
+
+After a weekend of measurement the system is working and delivered the first measured current data - and some strange voltage behaviour once the load switched on.
+
+![Data Monday](pic/2020-06-08_data.jpg)
+
+The power box and MPPT controller measured and displayed their data effectively.
+
+![power box and mppt controller](pic/2020-06-08_solar.jpg)
+
+And the final stage for the wind generator and the output measurement was in place:
+
+![wind generator setup](pic/2020-06-08_wind.jpg)
