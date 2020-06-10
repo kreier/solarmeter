@@ -362,3 +362,10 @@ The T-Koala has some direct pins, for example for the battery - it's easier to c
 
 ![T-Koala from TTGO](pic/T-Koala.jpg)
 
+And I finished the soldering of the board with several voltage dividers and two LEDs to lower the voltage into the measurable range of the ESP32 to see the voltage difference over the 0.1 Ohm resistor in line with the solar panel.
+
+![board v0.1](pic/2020-06-05_board.jpg)
+
+And I installed it after sunset to get the first measurements. It's installed parallel to the other ESP32 that operated just with 2 voltage dividers for the last 2 weeks - which will cause weired values because of wrong reference levels - and pin26 of the ESP.
+
+![board v0.1](pic/2020-06-05_setup.jpg)
