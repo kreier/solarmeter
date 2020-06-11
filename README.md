@@ -398,5 +398,10 @@ Above the battery pin are the three voltage dividers 1 k : 10 K for solar panel 
 
 On the right corner is the small circuit for the second solar cell to charge the LiPo battery of the ESP32. It got its own 4.7k : 1k voltage divider connected to pin 12 and has a step down converter with USB output and a USB-C cable to the connector. The 5V pin of the board can't be used.
 
-
 ![board top](pic/2020-06-09_board-bottom.jpg)
+
+Shortly after 2:00 PM we installed the board, connected the wires and wind generator - and got our first measurement! The rainstorm from 4:00 PM to 5:00 PM provided some constant energy creation.
+
+![first wind June 9th](pic/2020-06-09_wind-solar.jpg)
+
+You can see the less noisy signal due to 100x multisampling. As soon as the 20W load lamp switches on the voltage of the battery drops, bust for some time the solar panel can provide the 1.6 Ampere needed, so the voltage stays constant. The clouds at 2:00 PM already indicated the coming storm - and the solar panel virtually started to produce any usable energy. Sunset is indicated at 6:20 PM.
