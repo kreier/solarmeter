@@ -383,3 +383,20 @@ The power box and MPPT controller measured and displayed their data effectively.
 And the final stage for the wind generator and the output measurement was in place:
 
 ![wind generator setup](pic/2020-06-08_wind.jpg)
+
+> 2020/06/09
+
+The mainboard with the TTGO T-Koala ESP32 microcomputer got the rectifying circuit for the 3 phase AC from the wind generator on top. The 6 1N4007 diodes are accompanied by a 100 µF capacitor and a 10 kOhm load to smooth some of the voltage. An blue LED with 10 kOhm is parallel as well. And below is the voltage divider with 1k : 10k as input voltage to pin 26.
+
+In the middle the 100k : 100k voltage divider between GND and battery voltage can be seen as input for pin 13. 
+
+![board top](pic/2020-06-09_board-top.jpg)
+
+Bottom left are two green diodes that lower the positive voltage of the solar panel prior and after the 0.12 Ohm shunt in line with the positive line. Since positive is connected to 3.3V, the input voltage is 1.1 Volt or higher, if the solar panel provides current. Voltages are measured at pin 34 and 35 and are connected to the negative battery pin with 10 kOhm resistors (the two blue ones) for some 1.2 mA current.  
+
+Above the battery pin are the three voltage dividers 1 k : 10 K for solar panel (pin 32), the battery (33) and the load (14). Since all are connected on the positive pin, the voltage is measured against 3.3V and connected to the negative pin with the 10 kOhm resistor.
+
+On the right corner is the small circuit for the second solar cell to charge the LiPo battery of the ESP32. It got its own 4.7k : 1k voltage divider connected to pin 12 and has a step down converter with USB output and a USB-C cable to the connector. The 5V pin of the board can't be used.
+
+
+![board top](pic/2020-06-09_board-bottom.jpg)
