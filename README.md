@@ -429,3 +429,8 @@ Pin assignment:
 int voltage[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};         // all voltages in millivolt
 int pins[9] = {32, 33, 34, 35, 14, 26, 27, 12, 13};   // solar, battery, curA, curB, load, wind, dump, solar2, LiPo
 ```
+> 2020/06/12
+
+I combined the mentioned solar panel from yesterday (1 Watt) with a third solar panel to support the hybrid wind station, since the wind generator only seldomly actually charges the battery, the voltage is usually too low. And the small solar panel needs until 9:00 PM to have the LiPo battery recharged from one night of measurement.
+
+![Two additional solar panels](pic/2020-06-12_solar2.jpg)
