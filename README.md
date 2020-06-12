@@ -405,3 +405,29 @@ Shortly after 2:00 PM we installed the board, connected the wires and wind gener
 ![first wind June 9th](pic/2020-06-09_wind-solar.jpg)
 
 You can see the less noisy signal due to 100x multisampling. As soon as the 20W load lamp switches on the voltage of the battery drops, bust for some time the solar panel can provide the 1.6 Ampere needed, so the voltage stays constant. The clouds at 2:00 PM already indicated the coming storm - and the solar panel virtually started to produce any usable energy. Sunset is indicated at 6:20 PM.
+
+> 2020/06/11
+
+The LiPo battery of the T-Koala would be drained within 2 weeks - on a project with renewable energy! Unfortunately we can't connect the microcontroller to the big 24 Ah battery, because the solar controller has no common ground, but the positive poles connected. Relative to the negative pole of the battery we get therefore either the full battery voltage during the night or negative voltages (-8 Volt) during the day. Not easy to fit into the 0-3.3 Volt range of the ESP32. Therefore we added a second small solar panel and measure this voltage as well. Here is a collection of our data:
+
+![data June 11th](pic/2020-06-11_datacollection.png)
+
+So far we measure the voltages:
+- solar panel
+- wind generator
+- 12V battery
+- load
+- secondary solar panel
+- LiPo battery to power the ESP32
+
+The dump resistor is not yet connected. Additionally we measure the __current__ from the solar panel.
+
+Pin assignment: 
+
+``` c
+//    32,      33,       34,       35,   14,   26,   27,     12,   13
+// solar, battery, currentA, currentB, load, wind, dump, solar2, LiPo  
+
+int voltage[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};         // all voltages in millivolt
+int pins[9] = {32, 33, 34, 35, 14, 26, 27, 12, 13};   // solar, battery, curA, curB, load, wind, dump, solar2, LiPo
+```
