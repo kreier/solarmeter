@@ -1,14 +1,16 @@
 # Solarmeter
 
-This project continuously measures the output power of a solar cell. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. Our first result from AISVN with the solar panel looks like this:
+This project continuously measures the output power of a solar cell and a wind generator on the roof of building A. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. This is the outdoor setup:
 
-![voltage over a day](aisvn/data/data_2020-05-21.jpg)
+![Setup roof](pic/2020-06-12_roof.jpg)
 
-![battery week](aisvn/data/2020-05-26_battery_week.jpg)
+The electronics part in the room below looks like this:
 
-![voltage in phu my hung](pic/May2020_6V_2W_panel.jpg)
+![Setup June 2020](pic/2020-06-12_setup.jpg)
 
-![power in phu my hung](pic/May2020_power.jpg)
+And this is a sample data collection from one of the first days:
+
+![data June 11th](pic/2020-06-11_datacollection.png)
 
 ## Setup
 
@@ -16,13 +18,9 @@ The initial setup from December 2019 requires a Laptop with Vernier software to 
 
 ![load circuit for the solar panel and voltage measurement](pic/setup_2020-01-16.jpg)
 
-This is the setup in June 2020:
+This is the setup in June 12th, 2020:
 
-**still to come**
-
-
-
-
+![Setup June 2020](pic/2020-06-12_setup.jpg)
 
 ## Materials
 
