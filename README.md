@@ -434,3 +434,9 @@ int pins[9] = {32, 33, 34, 35, 14, 26, 27, 12, 13};   // solar, battery, curA, c
 I combined the mentioned solar panel from yesterday (1 Watt) with a third solar panel to support the hybrid wind station, since the wind generator only seldomly actually charges the battery, the voltage is usually too low. And the small solar panel needs until 9:00 PM to have the LiPo battery recharged from one night of measurement.
 
 ![Two additional solar panels](pic/2020-06-12_solar2.jpg)
+
+> 2020/06/16
+
+The effect of 100x multi-sampling can easily be seen in this voltage measurement of the LiPo battery for the ESP32. Just compare before (20 mV noise) and after (2 mV noise). Since one measurement is 9.5 µs the 100x multisample takes only a millisecond.
+
+![multisample benefit](pic/2020-06-15_multisample.png)
