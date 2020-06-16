@@ -150,3 +150,36 @@ void measureVoltages() {
   Serial.println(bootCount);  
 }
 ```
+
+## Stations and software editions
+
+All stations use an ESP32 with LiPo battery backup and build-in charger, reloaded with solar energy. Usually the charge controller only works when powered from USB, so a cable leaves the voltage regulator for 5V to the board.
+
+### SolarAISVN
+
+Main box at AISVN with a T-Koala since May 28th, 2020. It transmits webhook aisvn via IFTTT to IFTTT_aisvn every 120 seconds. That's 720 values each day or 262800 sets in a year. Pin assignment and submitted data:
+
+```
+pin:       32,      33,       34,       35,   14,   26,   27,     12,   13
+value:  solar, battery, currentA, currentB, load, wind, temp, solar2, LiPo
+
+submit:    solar, battery, current, load, wind, temp, solar2, LiPo, bootCount
+voltage[]:     0,       1,       2,    4,    5,    6,      7,    8,
+```
+First column submitted is date and time, then the 8 values and finally the bootcount. 2,102,400 data points in a year.
+
+### SolarAISVN2
+
+The second box was added since the solar controllers have no common ground, but connect the positive voltage. This is equal to +3.3V of the first box and requires the second solar panel to actually charge the ESP32. With a second 12V lead battery connected to the hybrid controller, now with a smaller 18V solar panel and the wind generator we created a second measuring box. 
+
+The board is a LOLIN32 lite from WeMos. Transmitting to IFTTT_aisvn2 every 120 seconds, the values are:
+
+### SolarPHUMY
+
+It is a copy of the AISVN box to further investigate possibilities and options. It features a T-Koala as well.
+
+### SolarPHUMY2
+
+This was the first setup from May 2020.
+
+The board is a LOLIN32 lite from WeMos. Transmitting to IFTTT_aisvn2 every 120 seconds, the values are:
