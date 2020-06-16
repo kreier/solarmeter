@@ -1,4 +1,7 @@
 // Solar- and windmeter at AISVN - test edition
+// 2020/06/05 v0.3
+//
+// data collection over the weekend - school ended on Friday June 5th, 2020
  
 #include <WiFi.h>
 #include <Wire.h>
