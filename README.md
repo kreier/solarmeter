@@ -1,6 +1,10 @@
 # Solarmeter
 
-This project continuously measures the output power of a solar cell and a wind generator on the roof of building A. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. This is the outdoor setup:
+This project continuously measures the output power of a solar cell and a wind generator on the roof of building A. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. More pictures and descriptions here:
+
+<p align="center"><b><a href="https://sites.google.com/ais.edu.vn/solar">https://sites.google.com/ais.edu.vn/solar</a></b></p>
+
+This is how our outdoor setup with one 500W wind generator and a 60W solar panel looks like. Two smaller panels for ESP32 power and hybrid generator are not shown.
 
 ![Setup roof](pic/2020-06-12_roof.jpg)
 
@@ -602,3 +606,9 @@ I combined the mentioned solar panel from yesterday (1 Watt) with a third solar 
 The effect of 100x multi-sampling can easily be seen in this voltage measurement of the LiPo battery for the ESP32. Just compare before (20 mV noise) and after (2 mV noise). Since one measurement is 9.5 µs the 100x multisample takes only a millisecond.
 
 ![multisample benefit](pic/2020-06-15_multisample.png)
+
+> 2020/06/18
+
+The second box passed the prove of concept: I'm able to switch up to 1.5 Ampere with a 2SD613 transistor and a 150 Ohm resistor connected to an output of the ESP32. And the output stays active even in deep sleep with the right software. And the measured data make sense, a draft software script is uploaded as [SolarAISVN2.ino](software/SolarAISVN2.ino) in the software folder. Most of the box inner is ready as well, only the PCB needs to be finished:
+
+![Second box with ESP32](pic/2020-06-18_box.jpg)
