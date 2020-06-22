@@ -1,4 +1,4 @@
-// Solar- and windmeter at AISVN v0.6
+// Solar- and windmeter at AISVN v0.5
  
 #include <WiFi.h>
 #include <Wire.h>
