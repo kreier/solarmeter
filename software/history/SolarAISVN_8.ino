@@ -1,8 +1,12 @@
 // Solar- and windmeter at AISVN v0.8 
 // 2020/06/15
 //
+// no more negative voltages
+// offset for solar2 corrected
+//
 // pin:       32,      33,       34,       35,   14,   26,   27,     12,   13
 // value:  solar, battery, currentA, currentB, load, wind, temp, solar2, LiPo
+//
 // submit: solar, battery, current, load, wind, temp, solar2, LiPo, bootCount
 //             0,       1,       2,    4,    5,    6,      7,    8,
  
