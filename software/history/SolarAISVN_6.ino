@@ -1,5 +1,8 @@
 // Solar- and windmeter at AISVN v0.6
 // 2020/06/10
+// 
+// voltages calibrated
+// measurements of wind generator included
  
 #include <WiFi.h>
 #include <Wire.h>
