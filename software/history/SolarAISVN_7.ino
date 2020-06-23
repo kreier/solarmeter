@@ -1,6 +1,10 @@
 // Solar- and windmeter at AISVN v0.7 
 // 2020/06/15
 //
+//
+// voltages converted on ESP32
+// submission time back to 120 seconds
+//
 // pin:       32,      33,       34,       35,   14,   26,   27,     12,   13
 // value:  solar, battery, currentA, currentB, load, wind, dump, solar2, LiPo
 // submit: solar, battery, current, load, wind, solar2, LiPo, bootCount
