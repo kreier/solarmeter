@@ -1,13 +1,15 @@
-// Solarmeter 2 in Phu My Hung v0.1  2020/05/17
-// Inspired by https://randomnerdtutorials.com/esp32-esp8266-publish-sensor-readings-to-google-sheets/
+// Solarmeter 2 in Phu My Hung v0.2  2020/06/14
+// future to measure power on solar panel 5V to 20V
+//
+// pin: 32, 33, 34, 35 - temp, current, solar2, LiPo2
+// submit: solar2, current2, power, temp, LiPo2, bootCount2
  
-#ifdef ESP32
-  #include <WiFi.h>
-#else
-  #include <ESP8266WiFi.h>
-#endif
-
+#include <WiFi.h>
 #include <Wire.h>
+#include <soc/sens_reg.h>
+
+RTC_DATA_ATTR int bootCount = 0;
+static RTC_NOINIT_ATTR int reg_b; // place in RTC slow memory so available after deepsleep
 
 // Replace with your SSID and Password
 const char* ssid     = "REPLACE_WITH_YOUR_SSID";
@@ -21,36 +23,47 @@ const char* server = "maker.ifttt.com";
 
 // Time to sleep
 uint64_t uS_TO_S_FACTOR = 1000000;  // Conversion factor for micro seconds to seconds
-// sleep for 30 minutes = 1800 seconds
+// sleep for 2 minutes = 120 seconds
 uint64_t TIME_TO_SLEEP = 120;
 
-int adcValue = 0;
-int batValue = 0;
+//   32,      33,     34,    35
+// temp, current, solar2, LiPo2  
+
+int voltage[4] = {0, 0, 0, 0};    // all voltages in millivolt
+int pins[4] = {32, 33, 34, 35};   // temp, current, solar2, LiPo2
+int power = 0; // voltage measured times current measured - just to submit
+int ledPin = 5;
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, LOW);  
-  Serial.begin(115200); 
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH);  
+  Serial.begin(115200);
+  // determine cause of reset
+  esp_reset_reason_t reason = esp_reset_reason();
+  Serial.print("reason ");Serial.println(reason);
+  // get reg_b if reset not from deep sleep
+  if ((reason != ESP_RST_DEEPSLEEP)) {
+    reg_b = READ_PERI_REG(SENS_SAR_READ_CTRL2_REG);
+    Serial.println("Reading reg b.....");
+  }
+  Serial.print("reg b: ");
+  printf("%" PRIu64 "\n", reg_b);
   delay(50);
-  digitalWrite(LED_BUILTIN, HIGH);   
+  digitalWrite(ledPin, LOW);
+  bootCount++;
   delay(1000);
+  measureVoltages();
 
-  digitalWrite(LED_BUILTIN, LOW);  
+  digitalWrite(ledPin, HIGH);  
   initWifi();
   makeIFTTTRequest();
-  digitalWrite(LED_BUILTIN, HIGH); 
+  digitalWrite(ledPin, LOW); 
 
-  #ifdef ESP32
-    // enable timer deep sleep
-    esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);    
-    Serial.println("Going to sleep now");
-    // start deep sleep for 120 seconds (2 minutes)
-    esp_deep_sleep_start();
-  #else
-    // Deep sleep mode for 120 seconds (2 minutes)
-    Serial.println("Going to sleep now");
-    ESP.deepSleep(TIME_TO_SLEEP * uS_TO_S_FACTOR); 
-  #endif
+  // enable timer deep sleep
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);    
+  Serial.println("Going to sleep now");
+  // start deep sleep for 120 seconds (2 minutes)
+  esp_deep_sleep_start();
 }
 
 void loop() {
@@ -98,15 +111,10 @@ void makeIFTTTRequest() {
   Serial.print("Request resource: "); 
   Serial.println(resource);
 
-  // raw and converted voltage reading
-  adcValue = analogRead( 34 );
-  batValue = analogRead( 35 );
-  String jsonObject = String("{\"value1\":\"") + adcValue + "\",\"value2\":\"" + int((adcValue * 0.826 + 150) * 3)
-                      + "\",\"value3\":\"" + int((batValue * 0.826 + 150) * 2) + "\"}";
-                      
-  // Comment the previous line and uncomment the next line to publish temperature readings in Fahrenheit                    
-  /*String jsonObject = String("{\"value1\":\"") + (1.8 * bme.readTemperature() + 32) + "\",\"value2\":\"" 
-                      + (bme.readPressure()/100.0F) + "\",\"value3\":\"" + bme.readHumidity() + "\"}";*/
+  String jsonObject = String("{\"value1\":\"") + voltage[2] + "|||" + voltage[1]
+                          + "\",\"value2\":\"" + power      + "|||" + voltage[0]/10.0
+                          + "\",\"value3\":\"" + voltage[3] + "|||" + bootCount + "\"}";
+
                       
   client.println(String("POST ") + resource + " HTTP/1.1");
   client.println(String("Host: ") + server); 
@@ -129,4 +137,30 @@ void makeIFTTTRequest() {
   
   Serial.println("\nclosing connection");
   client.stop(); 
+}
+
+void measureVoltages() {
+  WRITE_PERI_REG(SENS_SAR_READ_CTRL2_REG, reg_b); // only needed after deep sleep
+  SET_PERI_REG_MASK(SENS_SAR_READ_CTRL2_REG, SENS_SAR2_DATA_INV);
+  Serial.print(" ** Voltages measured: ");
+  for(int i = 0; i < 4; i++) {
+    // multisample 100x to reduce noise - 9.5 microseconds x 100 = 1ms per voltage
+    voltage[i] = 0;
+    for(int multi = 0; multi < 100; multi++) {
+      voltage[i] += analogRead( pins[i] );
+    }
+    voltage[i] = voltage[i] / 100;
+    Serial.print(voltage[i]);
+    Serial.print("  ");
+  }
+  // conversion to voltage prior to voltage divider
+  //   32,      33,     34,    35  - 
+  // temp, current, solar2, LiPo2  
+  voltage[0] = int((voltage[0]) * 0.83 + 155);          // pin32 temp    voltage in millivolt/10 =  temperature in celsius
+  voltage[1] = int((voltage[1]) * 0.83 + 155); // pin33 battery  voltage divider 10k : 1.2 k Ohm 1:1
+  voltage[2] = int((voltage[2]) * 1.64 + 315);         // pin34 voltage solar divider 1k : 1k  2:1
+  if(voltage[2] == 315) voltage[2] = 0;
+  voltage[3] = int((voltage[3]) * 1.65 + 307);         // pin35 LiPo     voltage divider 10kOhm 2:1
+  Serial.print("Boot number: ");
+  Serial.println(bootCount);  
 }
