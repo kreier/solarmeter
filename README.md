@@ -6,7 +6,7 @@ This project continuously measures the output power of a solar cell and a wind g
 
 This is how our outdoor setup with one 500W wind generator and a 60W solar panel looks like. Two smaller panels for ESP32 power and hybrid generator are not shown.
 
-![Setup roof](pic/2020-06-12_roof.jpg)
+![Setup roof](pic/2020-06-23_roof.jpg)
 
 The electronics part in the room below looks like this:
 
