@@ -1,6 +1,8 @@
-// Solar- and windmeter at AISVN2 v0.3
-// 2020/06/22
-// hysteresis for load introduced
+// Solar- and windmeter at AISVN2 v0.4
+// 2020/06/23
+//
+// read state if pin25 and write to voltage[5]
+// still with deep sleep, value therefore in RTC_DATA_ATTR pin25
 //
 // pin:          34,       35,     32,       33,       25,    12
 // value:  currentA, currentB, solar3, battery2, load_OUT, LiPo2
@@ -15,7 +17,7 @@
 #include <driver/rtc_io.h>
 
 RTC_DATA_ATTR int bootCount = 0;
-static RTC_NOINIT_ATTR int reg_b; // place in RTC slow memory so available after deepsleep
+RTC_DATA_ATTR int pin25 = 0;
 gpio_num_t pin_LOAD = GPIO_NUM_25;
 
 // Replace with your SSID and Password + uncomment
@@ -30,15 +32,14 @@ const char* server = "maker.ifttt.com";
 
 // Time to sleep
 uint64_t uS_TO_S_FACTOR = 1000000;  // Conversion factor for micro seconds to seconds
-// sleep for 2 minutes = 120 seconds
-uint64_t TIME_TO_SLEEP = 118; // need two seconds each time to upload ...
+uint64_t TIME_TO_SLEEP = 118; // need two seconds each time to upload ... sleep 2 minutes
 
 // pin:          34,       35,     32,       33,    12,       25
 // value:  currentA, currentB, solar3, battery2, LiPo2, load_OUT 
 
 int voltage[6] = {0, 0, 0, 0, 0, 0};       // all voltages in millivolt
 int pins[6] = {32, 33, 34, 35, 12, 25}; // solar, battery, curA, curB, LiPo, load(OUT)
-int ledPin = 2;  // T-Koala: 5   LoLin lite 22  DevKit V1 2
+int ledPin = 2;  // T-Koala: 5   LoLin32 lite 22  DevKit V1 2
 
 void setup() {
   pinMode(ledPin, OUTPUT);
@@ -51,13 +52,6 @@ void setup() {
   // determine cause of reset
   esp_reset_reason_t reason = esp_reset_reason();
   Serial.print("reason ");Serial.println(reason);
-  // get reg_b if reset not from deep sleep
-  if ((reason != ESP_RST_DEEPSLEEP)) {
-    reg_b = READ_PERI_REG(SENS_SAR_READ_CTRL2_REG);
-    Serial.println("Reading reg b.....");
-  } 
-  Serial.print("reg b: ");
-  printf("%" PRIu64 "\n", reg_b);
   delay(50);
   digitalWrite(ledPin, LOW);
   bootCount++;
@@ -66,14 +60,14 @@ void setup() {
 
   // battery too low? switch off load via pin_LOAD in rtc
   if(voltage[1] < 12200) {
-    rtc_gpio_set_level(pin_LOAD,0); // GPIO LOW
-    voltage[5] = 0;
+    pin25 = 0; // in RTC slow mem - survives deep sleep
   } 
   if(voltage[1] > 12800) { // voltage high enough to power load on
-    rtc_gpio_set_level(pin_LOAD,1); // GPIO HIGH
-    voltage[5] = 1;
+    pin25 = 1;
   }
+  rtc_gpio_set_level(pin_LOAD, pin25); // GPIO HIGH
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_ON);
+  voltage[5] = pin25;
 
   digitalWrite(ledPin, HIGH);  
   initWifi();
@@ -164,8 +158,6 @@ void makeIFTTTRequest() {
 }
 
 void measureVoltages() {
-  WRITE_PERI_REG(SENS_SAR_READ_CTRL2_REG, reg_b); // only needed after deep sleep
-  SET_PERI_REG_MASK(SENS_SAR_READ_CTRL2_REG, SENS_SAR2_DATA_INV);
   Serial.print(" ** Voltages measured: ");
   for(int i = 0; i < 5; i++) {
     // multisample 100x to reduce noise - 9.5 microseconds x 100 = 1ms per voltage
@@ -193,15 +185,27 @@ void measureVoltages() {
   //
   // submit: solar, battery, currentA, currentB, LiPo2, load, bootCount
   //             0,       1,        2,        3,     4,    5
-  
-  voltage[0] = int(25.3 - voltage[0] * 0.0117);  // pin32 solar3 double voltage divider 10:10 & 47:10
+
+  // solar3
+  // pin32 solar3 double voltage divider 10:10 & 47:10
+  voltage[0] = int(25300 - voltage[0] * 11.7);  
   if(voltage[0] < 0) voltage[0] = 0;
-  voltage[1] = int((voltage[1] * 0.83 + 150) * 5.7);  // pin33 battery  voltage divider 47k:10k 5.7:1
+  //
+  // battery2
+  // pin33 battery  voltage divider 47k:10k 5.7:1
+  voltage[1] = int((voltage[1] * 0.83 + 150) * 5.7);
+  //
+  // currentA
   // voltage[2} is difference pin34 to 1.580 Volt - over 1.6 Ohm - current is 1/1.6 voltage
   voltage[2] = int(((voltage[2] * 0.83 + 150) - 1564) / 1.6);
+  //
+  // currentB
   // voltage[3} is difference pin35 to 1.580 Volt - over 0.1 Ohm - current is 1/0.1 voltage
-  voltage[3] = int(((voltage[3] * 0.83 + 150) - 1627) * 10);
-  voltage[4] = int((voltage[4] * 0.83 + 150) * 2.0);  // pin12 LiPo2     voltage divider 100k:100k 2:1
+  voltage[3] = int(((voltage[3] * 0.83 + 150) - 1660) * 10); // fixed 2020/06/24 was 1627
+  //
+  // LiPo2
+  // pin12 LiPo2     voltage divider 100k:100k 2:1
+  voltage[4] = int((voltage[4] * 0.83 + 150) * 2.0);  
   Serial.print("Boot number: ");
-  Serial.println(bootCount);  
+  Serial.println(bootCount);
 }
