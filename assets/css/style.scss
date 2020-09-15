@@ -1,0 +1,16 @@
+---
+---
+
+// css for kreier.github.io/solarmeter  #original
+
+$header-bg-color: #155899;           // #159957 bottom right corner
+$header-bg-color-secondary: #159957; // #155899 top left corner
+
+$body-link-color: #1E6BC8;           // #1E6BC8
+$blockquote-text-color: #819198;
+
+$section-headings-color: #159957;    // #159957
+
+$code-text-color: #494D4E;
+
+@import "{{ site.theme }}";
