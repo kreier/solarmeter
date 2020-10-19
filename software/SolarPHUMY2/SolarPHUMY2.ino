@@ -1,4 +1,4 @@
-// Solarmeter 2 in Phu My Hung v0.2  2020/06/14
+// Solarmeter 2 in Phu My Hung v0.3  2020/10/15
 // future to measure power on solar panel 5V to 20V
 //
 // pin: 32, 33, 34, 35 - temp, current, solar2, LiPo2
@@ -7,16 +7,14 @@
 #include <WiFi.h>
 #include <Wire.h>
 #include <soc/sens_reg.h>
+#include <credentials_lib.h>  // this file contains:
+// const char* ssid     = "REPLACE_WITH_YOUR_SSID";        // WiFi credentials
+// const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+// const char* resource = "/trigger/data/with/key/value";  // IFTTT URL resource
+
 
 RTC_DATA_ATTR int bootCount = 0;
 static RTC_NOINIT_ATTR int reg_b; // place in RTC slow memory so available after deepsleep
-
-// Replace with your SSID and Password
-const char* ssid     = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
-
-// Replace with your unique IFTTT URL resource
-const char* resource = "/trigger/data/with/key/value";
 
 // Maker Webhooks IFTTT
 const char* server = "maker.ifttt.com";
@@ -32,7 +30,7 @@ uint64_t TIME_TO_SLEEP = 120;
 int voltage[4] = {0, 0, 0, 0};    // all voltages in millivolt
 int pins[4] = {32, 33, 34, 35};   // temp, current, solar2, LiPo2
 int power = 0; // voltage measured times current measured - just to submit
-int ledPin = 5;
+int ledPin = 2;  // T-Koala: 5  DOIT DEVKIT V1: 2
 
 void setup() {
   pinMode(ledPin, OUTPUT);
