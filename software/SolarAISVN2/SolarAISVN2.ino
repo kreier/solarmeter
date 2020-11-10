@@ -1,4 +1,4 @@
-// Solar- and windmeter at AISVN2 v0.5
+// Solar- and windmeter at AISVN2 v0.6
 // 2020/10/30
 //
 // read state if pin25 and write to voltage[5]
@@ -9,7 +9,17 @@
 //
 // submit: solar, battery, currentA, currentB, LiPo2, load, bootCount
 //             0,       1,        2,        3,     4,    5
- 
+
+#define TOTAL_MEASUREMENTS 6
+#define CURRENTA   0
+#define CURRENTB   1
+#define SOLAR3     2
+#define BATTERY2   3
+#define LOAD       4
+#define LIPO2      5
+
+#define NUMBER_VALUES 
+
 #include <WiFi.h>
 #include <Wire.h>
 #include <soc/sens_reg.h>
