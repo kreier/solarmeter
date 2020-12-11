@@ -1,5 +1,8 @@
 # Solarmeter
 
+[![GitHub release](https://img.shields.io/github/release/kreier/solarmeter.svg)](https://GitHub.com/kreier/solarmeter/releases/)
+[![MIT license](https://img.shields.io/github/license/kreier/solarmeter)](https://kreier.mit-license.org/)
+
 This project continuously measures the output power of a solar cell and a wind generator on the roof of building A. The data is collected in Ho Chi Minh City 2020 and part of an EE (extended essay) in IB Physics at the AISVN. More pictures and descriptions here:
 
 <p align="center"><b><a href="https://sites.google.com/ais.edu.vn/solar">https://sites.google.com/ais.edu.vn/solar</a></b></p>
