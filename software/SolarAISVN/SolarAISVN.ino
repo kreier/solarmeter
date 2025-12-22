@@ -1,9 +1,8 @@
-// Solar- and windmeter at AISVN v0.10 just rewrite 
-// 2020/10/29
+// Solar- and windmeter at AISVN v1.0 just rewrite 
+// 2020/10/29 was 0.10
+// 2024/01/12 renamed as 1.0
 //
-// transmitted data moved from millivolt to volt and milliAmpere to Ampere
-// Transmission of power value included
-// WiFi credentials exported to credentials.h
+// pin definitions moved to the beginning of this file
 //
 // pin:       32,      33,       34,       35,   14,   26,   27,     12,   13
 // value:  solar, battery, currentA, currentB, load, wind, temp, solar2, LiPo
